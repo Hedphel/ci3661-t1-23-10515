@@ -79,8 +79,16 @@ esDigito :: Char -> Bool
 esDigito c = c >= '0' && c <= '9'
 
 leerHora :: String -> Either String (Int, Int)
-leerHora [a, b, ':', c, d] = undefined
-leerHora _ = Left "Formato inválido."
+leerHora [a, b, ':', c, d]
+  | not (esDigito a && esDigito b && esDigito c && esDigito c) = Left "formato inválido"
+  | horas >= 24 = Left "hora fuera de rango"
+  | mins  >= 60 = Left "minutos fuera de rango"
+  | otherwise = Right(horas,mins)
+  where
+    horas = digitToInt a*10 + digitToInt b
+    mins = digitToInt c*10 + digitToInt d
+
+leerHora _ = Left "formato inválido"
 
 duracion :: String -> String -> Either String Int
 duracion = undefined

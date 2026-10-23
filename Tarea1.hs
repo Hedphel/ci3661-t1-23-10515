@@ -83,7 +83,7 @@ leerHora [a, b, ':', c, d]
   | not (esDigito a && esDigito b && esDigito c && esDigito c) = Left "formato inválido"
   | horas >= 24 = Left "hora fuera de rango"
   | mins  >= 60 = Left "minutos fuera de rango"
-  | otherwise = Right(horas,mins)
+  | otherwise   = Right(horas,mins)
   where
     horas = digitToInt a*10 + digitToInt b
     mins = digitToInt c*10 + digitToInt d
@@ -91,7 +91,16 @@ leerHora [a, b, ':', c, d]
 leerHora _ = Left "formato inválido"
 
 duracion :: String -> String -> Either String Int
-duracion = undefined
+duracion str1 str2 = 
+  case leerHora str1 of
+    -- Si tenemos un fallo en la duracion 1, devolvemos su error
+    Left err1 -> Left err1 
+    Right (h1, m1) -> 
+      case leerHora str2 of
+        -- Si pasa la primera pero falla la 2da, devolvemos este ultimo error
+        Left err2 -> Left err2
+        Right (h2, m2) ->
+          return Right digitToInt((h2 - h1)*60 + (m2 - m1))
 
 -- =====================================================================
 -- Parte B: orden superior.

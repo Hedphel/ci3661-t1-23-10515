@@ -129,10 +129,17 @@ promedioSobreUmbral umb xs =
 
 -- B2
 movimientosCaballo :: (Int, Int) -> [(Int, Int)]
-movimientosCaballo = undefined
+movimientosCaballo (r, c) = 
+  [ (r + dr, c + dc) | dr <- [-2, -1, 1, 2],
+   dc <- if abs dr == 1 then [-2, 2] else [-1, 1], 
+   r + dr >= 1, r + dr <= 8,
+   c + dc >= 1, c + dc <= 8 ]
+
+sinRepetidos :: Eq a => [a] -> [a]
+sinRepetidos = foldr (\x acc -> if elem x acc then acc else x : acc) []
 
 enDosSaltos :: (Int, Int) -> Int
-enDosSaltos = undefined
+enDosSaltos p = length (sinRepetidos [s2 | s1 <- movimientosCaballo p, s2 <- movimientosCaballo s1])
 
 -- B3
 miMap :: (a -> b) -> [a] -> [b]
@@ -141,5 +148,6 @@ miMap f xs = foldr (\x lista -> f x : lista) [] xs
 miFilter :: (a -> Bool) -> [a] -> [a]
 miFilter f xs = foldr (\x lista -> if f x then x: lista else lista) [] xs
 
+-- Usamos \acc -> acc como una forma de anidar funciones sin aplicarlas
 miFoldl :: (b -> a -> b) -> b -> [a] -> b
-miFoldl = undefined
+miFoldl f z xs = foldr (\x g -> \acc -> g (f acc x)) (\acc -> acc) xs z 

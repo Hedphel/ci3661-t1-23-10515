@@ -100,7 +100,15 @@ duracion str1 str2 =
         -- Si pasa la primera pero falla la 2da, devolvemos este ultimo error
         Left err2 -> Left err2
         Right (h2, m2) ->
-          return Right digitToInt((h2 - h1)*60 + (m2 - m1))
+          -- Buscamos ver la diferencia de minutos
+          let total1 = h1*60 + m1
+              total2 = h2*60 + m2
+              dif = total2 - total1
+          -- Si la diferencia es negativa, estamos yendo al próximo día
+          -- Agregamos 60*24 = 1440 minutos.
+          in if dif < 0
+            then Right (dif + 1440)
+            else Right dif
 
 -- =====================================================================
 -- Parte B: orden superior.

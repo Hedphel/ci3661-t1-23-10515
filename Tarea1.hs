@@ -151,3 +151,42 @@ miFilter f xs = foldr (\x lista -> if f x then x: lista else lista) [] xs
 -- Usamos \acc -> acc como una forma de anidar funciones sin aplicarlas
 miFoldl :: (b -> a -> b) -> b -> [a] -> b
 miFoldl f z xs = foldr (\x g -> \acc -> g (f acc x)) (\acc -> acc) xs z 
+
+-- B4
+
+-- Aquí, d = [0, 5, 1, 5]
+
+-- a. Reducción de foldr (-) 0 [0, 5, 1, 5]
+-- foldr (-) 0 [0, 5, 1, 5]
+-- = 0 - (foldr (-) 0 [5, 1, 5])
+-- = 0 - (5 - (foldr (-) 0 [1, 5]))
+-- = 0 - (5 - (1 - (foldr (-) 0 [5])))
+-- = 0 - (5 - (1 - (5 - (foldr (-) 0 []))))
+-- = 0 - (5 - (1 - (5 - 0)))
+-- = 0 - (5 - (1 - 5))
+-- = 0 - (5 - (-4))
+-- = 0 - 9
+-- = -9
+
+-- b. Reducción de foldl (-) 0 [0, 5, 1, 5]
+-- foldl (-) 0 [0, 5, 1, 5]
+-- = foldl (-) (0 - 0) [5, 1, 5]
+-- = foldl (-) 0 [5, 1, 5]
+-- = foldl (-) (0 - 5) [1, 5]
+-- = foldl (-) (-5) [1, 5]
+-- = foldl (-) (-5 - 1) [5]
+-- = foldl (-) (-6) [5]
+-- = foldl (-) (-6 - 5) []
+-- = foldl (-) (-11) []
+-- = -11
+
+-- d. Vemos que (a) y (b) dan distinto porque la resta no es asociativa
+-- y habíamos visto en la clase que esta es una condición indispensable
+-- para que ambas expansiones sean iguales. También debe ser conmutativa.
+-- foldl agrupa desde la izquierda al contrario de foldr, así que es
+-- normal que difieran.
+
+-- Si queremos que foldr op z xs == foldl op z xs para toda lista finita
+-- entonces tenemos que garantizar que tengamos una operación que sea
+-- asociativa y conmutativa, con un elemento z inicial que sea el neutro.
+-- Por ejemplo, la suma, con z=0.

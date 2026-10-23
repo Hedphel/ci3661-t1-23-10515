@@ -5,6 +5,16 @@
 --  Carnet: 23-10515
 --
 --  Declaración de uso de herramientas de IA (obligatoria, ver enunciado):
+-- Usé la herramienta Gemini para hacer consultas en general sobre las clases
+-- y para poder desarrollar los ejercicios. A continuación, detallaré en qué
+-- cosas me apoyé de este modelo de IA:
+-- A1: cómo hacer quitarAcentoChar, detectar errores de sintaxis y otros
+-- A2: cómo usar una funcion auxiliar definida dentro del where
+-- A3: Estructura sintáctica del case, agregar 1440 si el dif era negativo
+-- B1: Corregir sintaxis y agregar condicion de si cant == 0
+-- B2: Lógica para plantear el movimiento del caballo
+-- B3: Corregir errores, consultas sobre sintaxis
+-- B4: Verificación de resultados
 --
 -- =====================================================================
 --  No cambies el nombre del módulo ni la lista de exportación, ni las

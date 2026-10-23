@@ -75,8 +75,12 @@ mayorYMenor (x:xs) = Just (aux x x xs)
      | otherwise = aux min max ys
 
 -- A3
+esDigito :: Char -> Bool
+esDigito c = c >= '0' && c <= '9'
+
 leerHora :: String -> Either String (Int, Int)
-leerHora = undefined
+leerHora [a, b, ':', c, d] = undefined
+leerHora _ = Left "Formato inválido."
 
 duracion :: String -> String -> Either String Int
 duracion = undefined

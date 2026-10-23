@@ -60,7 +60,9 @@ esPalindromo s = cadenaLimpia == reversa cadenaLimpia
 -- A2
 -- Explica aquí, en dos o tres líneas, por qué tu solución recorre la
 -- lista una sola vez:
---
+-- Hacemos un llamado recursivo con una función auxiliar llamada aux, y en lo
+-- que recorremos la lista, verificamos si cada elemento es mayor a nuestro máx
+-- o si es menor a nuestro mín, y vamos actualizando hasta el final de la lista
 mayorYMenor :: Ord a => [a] -> Maybe (a, a)
 mayorYMenor [] = Nothing
 mayorYMenor (x:xs) = Just (aux x x xs)

@@ -122,9 +122,11 @@ duracion str1 str2 =
 promedioSobreUmbral :: Double -> [Double] -> Maybe Double
 promedioSobreUmbral umb xs = 
   let (suma, cant) = foldr (\x (suma, cant) -> if x > umb then (suma+x, cant+1) else (suma, cant)) (0,0) xs
-  in if cant == 0 then Nothing
-     else Just (suma /fromIntegral cant)
-     
+  in -- Si no hay números, evitamos división entre cero 
+    if cant == 0 then Nothing 
+    -- Usamos fromIntegral para tener Doubles y calcular prom
+    else Just (suma / fromIntegral cant) 
+
 -- B2
 movimientosCaballo :: (Int, Int) -> [(Int, Int)]
 movimientosCaballo = undefined

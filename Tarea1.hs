@@ -33,6 +33,19 @@ import Data.Char (isAlphaNum, isDigit, toLower, digitToInt)
 -- =====================================================================
 
 -- A1
+quitarAcentoChar :: Char -> Char
+quitarAcentoChar c
+  | c == 'á' || c == 'ä' || c == 'Á' || c == 'Ä' = 'a'
+  | c == 'é' || c == 'ë' || c == 'É' || c == 'Ë' = 'e'
+  | c == 'í' || c == 'ï' || c == 'Í' || c == 'Ï' = 'i'
+  | c == 'ó' || c == 'ö' || c == 'Ó' || c == 'Ö' = 'o'
+  | c == 'ú' || c == 'ü' || c == 'Ú' || c == 'Ü' = 'u'
+  | otherwise = c
+
+reversa :: String -> String
+reversa [] = []
+reversa (x:xs) = reversa xs ++ [x]
+
 esPalindromo :: String -> Bool
 esPalindromo = undefined
 

@@ -42,12 +42,20 @@ quitarAcentoChar c
   | c == 'ú' || c == 'ü' || c == 'Ú' || c == 'Ü' = 'u'
   | otherwise = c
 
+limpiarCadena :: String -> String
+limpiarCadena [] = []
+limpiarCadena (x:xs)
+  | isAlphaNum charSinAcc = toLower charSinAcc : limpiarCadena xs
+  | otherwise = limpiarCadena xs
+  where charSinAcc = quitarAcentoChar x
+
 reversa :: String -> String
 reversa [] = []
 reversa (x:xs) = reversa xs ++ [x]
 
 esPalindromo :: String -> Bool
-esPalindromo = undefined
+esPalindromo s = cadenaLimpia == reversa cadenaLimpia
+  where cadenaLimpia = limpiarCadena s
 
 -- A2
 -- Explica aquí, en dos o tres líneas, por qué tu solución recorre la

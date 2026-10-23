@@ -136,7 +136,7 @@ enDosSaltos = undefined
 
 -- B3
 miMap :: (a -> b) -> [a] -> [b]
-miMap = undefined
+miMap f xs = foldr (\x lista -> f x : lista) [] xs
 
 miFilter :: (a -> Bool) -> [a] -> [a]
 miFilter = undefined

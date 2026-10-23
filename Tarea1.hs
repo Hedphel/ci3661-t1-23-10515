@@ -62,7 +62,15 @@ esPalindromo s = cadenaLimpia == reversa cadenaLimpia
 -- lista una sola vez:
 --
 mayorYMenor :: Ord a => [a] -> Maybe (a, a)
-mayorYMenor = undefined
+mayorYMenor [] = Nothing
+mayorYMenor (x:xs) = Just (aux x x xs)
+  where 
+    -- Aquí definimos una función auxiliar interna
+    aux min max [] = (min,max) -- Lista vacía
+    aux min max (y:ys)
+     | y < min = aux y max ys -- Aquí reemplazamos el valor mín por y
+     | y > max = aux min y ys -- y aquí reemplazamos x
+     | otherwise = aux min max ys
 
 -- A3
 leerHora :: String -> Either String (Int, Int)
